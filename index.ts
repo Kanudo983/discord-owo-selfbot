@@ -5,7 +5,7 @@ import path from "path"
 import os from "os"
 import fs from "fs"
 
-import { commandHandler, consoleNotify, ranInt, reloadPresence, send, sleep, solveCaptcha } from "./src/Extension.ts"
+import { commandHandler, consoleNotify, ranInt, send, sleep, solveCaptcha } from "./src/Extension.ts"
 import { Configuration, Tool } from "./src/lib/class.ts"
 import { main, selfbotNotify } from "./src/SelfbotWorker.ts"
 import { collectData } from "./src/DataCollector.ts"
@@ -54,7 +54,6 @@ process.on("SIGINT", async () => {
     client.on("ready", async () => {
         log(`\x1b[94mLogged In As ${client.user?.displayName}`, "i")
         global.startTime = Date.now()
-        reloadPresence(client)
         if(global.config.cmdPrefix) global.commands = await commandHandler()
         global.channel = client.channels.cache.get(global.config.channelID[0]) as TextChannel | NewsChannel
         main()
